@@ -8,15 +8,14 @@ TODO: Write a Short Description of the task.
 Homepage: TODO: Add the URL to the task's Homepage here.
 """
 from lm_eval.base import Task
-
-
+from torch.utils.data import DataLoader, Dataset
 # TODO: Add the BibTeX citation for the task.
 _CITATION = """
 """
 
 
 # TODO: Replace `NewTask` with the name of your Task.
-class Task(Task):
+class QueryItem_Task(Task):
     VERSION = 0
     # TODO: Add the `DATASET_PATH` string. This will be the name of the `Task`
     # dataset as denoted in HuggingFace `datasets`.
@@ -139,3 +138,36 @@ class Task(Task):
         # with the metric name as key and a `bool` value determining whether or
         # not higher values of that metric are deemed better.
         return {}
+
+
+class Task_Modified(Task):
+    """A task represents an entire benchmark including its dataset, problems,
+        answers, and evaluation methods. See BoolQ for a simple example implementation
+
+        A `doc` can be any python object which represents one instance of evaluation.
+        This is usually a dictionary e.g.
+            {"question": ..., "answer": ...} or
+            {"question": ..., question, answer)
+        """
+
+    # The name of the `Task` benchmark as denoted in the HuggingFace datasets Hub
+    # or a path to a custom `datasets` loading script.
+    DATASET_PATH: str = None
+
+    # The name of a subset within `DATASET_PATH`.
+    DATASET_NAME: str = None
+
+    def __init__(self):
+        super().__init__()
+        self.dataset = None  # TODO: self.dataset要接受construct_dataset的赋值
+
+
+    def download(self, data_dir=None, cache_dir=None, download_mode=None):
+        pass
+
+    def construct_dataset(self):
+        self.dataset = None
+
+
+class QueryItem_Dataset(Dataset):
+    def __init__(self, datapath):
