@@ -50,24 +50,6 @@ class MCTask_Modified(MultipleChoiceTask):
         
         self.dataset = data_lst
 
-    """def load_data(self):
-        assert os.path.exists(self.DATASET_PATH)
-        data_df = pd.read_csv(self.DATASET_PATH)
-        print(data_df.shape)
-
-        data_lst = data_df.values.tolist()
-        # assert isinstance(data, list)
-        data_map = map(self.__list2dict, data_lst)
-        assert isinstance(data_map, map)
-        self.dataset = data_map
-        self.data = data_lst
-
-    def __list2dict(self, list_) -> dict:
-        assert isinstance(list_, list) and len(list_) == 4
-        query, title, cate_desc, label = list_
-
-        return MCTask_Modified.InputTemplate(query, title, cate_desc, label).entity()"""
-
     class InputTemplate:
         def __init__(self, query: str, title: str, cate_desc: str, label: str):
             self.query = query
@@ -130,7 +112,9 @@ class QueryItem_Task(MCTask_Modified):
                 data_map = map(self._process_doc, self.dataset)
                 assert isinstance(data_map, map)
                 
-            return data_map
+                return data_map
+        else:
+            return None
 
     def validation_docs(self):
         if self.has_validation_docs():
@@ -162,7 +146,6 @@ class QueryItem_Task(MCTask_Modified):
         query, title, cate_desc, label = doc
 
         return MCTask_Modified.InputTemplate(query, title, cate_desc, label).entity()
-        
 
     def doc_to_text(self, doc):
         # TODO: Format the query prompt portion of the document example.
