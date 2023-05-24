@@ -28,27 +28,30 @@ class MCTask_Modified(MultipleChoiceTask):
             {"question": ..., "answer": ...} or
             {"question": ..., question, answer)
         """
-    """The 'modified' in class name indicates that the data are loaded from local_dir."""
+    """TODO: The 'modified' in class name indicates that the data are loaded from a local_dir."""
+    
     # The name of the `Task` benchmark as denoted in the HuggingFace datasets Hub
     # or a path to a custom `datasets` loading script.
-    DATASET_PATH: str = None
+    
+    # DATASET_PATH: str = r"/root/autodl-tmp/projects/llm_relevence_evaluation_data_0523.csv"
 
     # The name of a subset within `DATASET_PATH`.
     DATASET_NAME: str = None
 
     def __init__(self):
         super().__init__()
-        self.data = None
-        self.load_data()
-        """An example from self.data
-        
-        """
+        self.DATASET_PATH = r"/root/autodl-tmp/projects/llm_relevence_evaluation_data_0523.csv"
 
     def download(self, data_dir=None, cache_dir=None, download_mode=None):
-        pass
+        assert os.path.exists(self.DATASET_PATH)
+        data_df = pd.read_csv(self.DATASET_PATH)
+        print(data_df.shape)
+        data_lst = data_df.values.tolist()
+        
+        self.dataset = data_lst
 
-    def load_data(self):
-        assert os.path.exists(self.DATASET_PATH) and os.path.isdir(self.DATASET_PATH)
+    """def load_data(self):
+        assert os.path.exists(self.DATASET_PATH)
         data_df = pd.read_csv(self.DATASET_PATH)
         print(data_df.shape)
 
@@ -63,7 +66,7 @@ class MCTask_Modified(MultipleChoiceTask):
         assert isinstance(list_, list) and len(list_) == 4
         query, title, cate_desc, label = list_
 
-        return MCTask_Modified.InputTemplate(query, title, cate_desc, label).entity()
+        return MCTask_Modified.InputTemplate(query, title, cate_desc, label).entity()"""
 
     class InputTemplate:
         def __init__(self, query: str, title: str, cate_desc: str, label: str):
@@ -72,7 +75,7 @@ class MCTask_Modified(MultipleChoiceTask):
             self.cate_desc = cate_desc
             self.label = label
 
-        def entity(self):
+        def entity(self) -> dict:
             return {
                 "id": None,
                 "query": f"[Query] {self.query}\n"
@@ -89,7 +92,7 @@ class QueryItem_Task(MCTask_Modified):
     VERSION = 0
     # TODO: Add the `DATASET_PATH` string. This will be the name of the `Task`
     # dataset as denoted in HuggingFace `datasets`.
-    DATASET_PATH = ""
+    DATASET_PATH = r"/root/autodl-tmp/projects/llm_relevence_evaluation_data_0523.csv"
     # TODO: Add the `DATASET_NAME` string. This is the name of a subset within
     # `DATASET_PATH`. If there aren't specific subsets you need, leave this as `None`.
     DATASET_NAME = None
@@ -121,8 +124,13 @@ class QueryItem_Task(MCTask_Modified):
                 # `map(self._process_doc, self.dataset["validation"])`
                 # In most case you can leave this as is unless the dataset split is
                 # named differently than the default `"train"`.
-                self._training_docs = self.data
-            return self._training_docs
+                # self._training_docs = map(self._process_doc, self.data)
+                
+                # assert isinstance(data, list)
+                data_map = map(self._process_doc, self.dataset)
+                assert isinstance(data_map, map)
+                
+            return data_map
 
     def validation_docs(self):
         if self.has_validation_docs():
@@ -150,7 +158,11 @@ class QueryItem_Task(MCTask_Modified):
         # dataset split. See the TODOs in `train_docs`, `validation_docs`, and
         # `test_docs` for snippets.
         # NOTE: DELETE THIS FUNCTION IF UNUSED.
-        return self.dataset
+        assert isinstance(doc, list) and len(doc) == 4
+        query, title, cate_desc, label = doc
+
+        return MCTask_Modified.InputTemplate(query, title, cate_desc, label).entity()
+        
 
     def doc_to_text(self, doc):
         # TODO: Format the query prompt portion of the document example.
