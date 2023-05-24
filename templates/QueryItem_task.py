@@ -7,15 +7,85 @@ TODO: Write a Short Description of the task.
 
 Homepage: TODO: Add the URL to the task's Homepage here.
 """
-from lm_eval.base import Task
-from torch.utils.data import DataLoader, Dataset
+
+import os
+
+import pandas as pd
+
+from lm_eval.base import MultipleChoiceTask
+
 # TODO: Add the BibTeX citation for the task.
 _CITATION = """
 """
 
 
+class MCTask_Modified(MultipleChoiceTask):
+    """A task represents an entire benchmark including its dataset, problems,
+        answers, and evaluation methods. See BoolQ for a simple example implementation
+
+        A `doc` can be any python object which represents one instance of evaluation.
+        This is usually a dictionary e.g.
+            {"question": ..., "answer": ...} or
+            {"question": ..., question, answer)
+        """
+    """The 'modified' in class name indicates that the data are loaded from local_dir."""
+    # The name of the `Task` benchmark as denoted in the HuggingFace datasets Hub
+    # or a path to a custom `datasets` loading script.
+    DATASET_PATH: str = None
+
+    # The name of a subset within `DATASET_PATH`.
+    DATASET_NAME: str = None
+
+    def __init__(self):
+        super().__init__()
+        self.data = None
+        self.load_data()
+        """An example from self.data
+        
+        """
+
+    def download(self, data_dir=None, cache_dir=None, download_mode=None):
+        pass
+
+    def load_data(self):
+        assert os.path.exists(self.DATASET_PATH) and os.path.isdir(self.DATASET_PATH)
+        data_df = pd.read_csv(self.DATASET_PATH)
+        print(data_df.shape)
+
+        data_lst = data_df.values.tolist()
+        # assert isinstance(data, list)
+        data_map = map(self.__list2dict, data_lst)
+        assert isinstance(data_map, map)
+        self.dataset = data_map
+        self.data = data_lst
+
+    def __list2dict(self, list_) -> dict:
+        assert isinstance(list_, list) and len(list_) == 4
+        query, title, cate_desc, label = list_
+
+        return MCTask_Modified.InputTemplate(query, title, cate_desc, label).entity()
+
+    class InputTemplate:
+        def __init__(self, query: str, title: str, cate_desc: str, label: str):
+            self.query = query
+            self.title = title
+            self.cate_desc = cate_desc
+            self.label = label
+
+        def entity(self):
+            return {
+                "id": None,
+                "query": f"[Query] {self.query}\n"
+                         f"[Product]\n"
+                         f"Title: {self.title}\n"
+                         f"Category: {self.cate_desc}\n"
+                         f"[Relevance] ",
+                "gold": self.label
+            }
+
+
 # TODO: Replace `NewTask` with the name of your Task.
-class QueryItem_Task(Task):
+class QueryItem_Task(MCTask_Modified):
     VERSION = 0
     # TODO: Add the `DATASET_PATH` string. This will be the name of the `Task`
     # dataset as denoted in HuggingFace `datasets`.
@@ -24,9 +94,12 @@ class QueryItem_Task(Task):
     # `DATASET_PATH`. If there aren't specific subsets you need, leave this as `None`.
     DATASET_NAME = None
 
+    def __init__(self):
+        super().__init__()
+
     def has_training_docs(self):
         # TODO: Fill in the return with `True` if the Task has training data; else `False`.
-        return False
+        return True
 
     def has_validation_docs(self):
         # TODO: Fill in the return with `True` if the Task has validation data; else `False`.
@@ -48,7 +121,7 @@ class QueryItem_Task(Task):
                 # `map(self._process_doc, self.dataset["validation"])`
                 # In most case you can leave this as is unless the dataset split is
                 # named differently than the default `"train"`.
-                self._training_docs = list(self.dataset["train"])
+                self._training_docs = self.data
             return self._training_docs
 
     def validation_docs(self):
@@ -77,7 +150,7 @@ class QueryItem_Task(Task):
         # dataset split. See the TODOs in `train_docs`, `validation_docs`, and
         # `test_docs` for snippets.
         # NOTE: DELETE THIS FUNCTION IF UNUSED.
-        return doc
+        return self.dataset
 
     def doc_to_text(self, doc):
         # TODO: Format the query prompt portion of the document example.
@@ -138,36 +211,3 @@ class QueryItem_Task(Task):
         # with the metric name as key and a `bool` value determining whether or
         # not higher values of that metric are deemed better.
         return {}
-
-
-class Task_Modified(Task):
-    """A task represents an entire benchmark including its dataset, problems,
-        answers, and evaluation methods. See BoolQ for a simple example implementation
-
-        A `doc` can be any python object which represents one instance of evaluation.
-        This is usually a dictionary e.g.
-            {"question": ..., "answer": ...} or
-            {"question": ..., question, answer)
-        """
-
-    # The name of the `Task` benchmark as denoted in the HuggingFace datasets Hub
-    # or a path to a custom `datasets` loading script.
-    DATASET_PATH: str = None
-
-    # The name of a subset within `DATASET_PATH`.
-    DATASET_NAME: str = None
-
-    def __init__(self):
-        super().__init__()
-        self.dataset = None  # TODO: self.dataset要接受construct_dataset的赋值
-
-
-    def download(self, data_dir=None, cache_dir=None, download_mode=None):
-        pass
-
-    def construct_dataset(self):
-        self.dataset = None
-
-
-class QueryItem_Dataset(Dataset):
-    def __init__(self, datapath):
