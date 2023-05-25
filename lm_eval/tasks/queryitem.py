@@ -193,7 +193,7 @@ class QueryItem_Task(MCTask_Modified):
         # and return them as an iterable.
         return []
 
-    def process_results(self, doc, results):
+    # def process_results(self, doc, results):
         """Take a single document and the LM results and evaluates, returning a
         dict where keys are the names of submetrics and values are the values of
         the metric for that one document
@@ -206,7 +206,7 @@ class QueryItem_Task(MCTask_Modified):
         # TODO: For each (sub)metric in the task evaluation, add a key-value pair
         # with the metric name as key and the corresponding metric result as value
         # for the current `doc`.
-        return {}
+        # return {}
 
     def aggregation(self):
         """
