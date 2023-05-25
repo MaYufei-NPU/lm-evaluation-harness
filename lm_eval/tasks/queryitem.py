@@ -50,6 +50,24 @@ class MCTask_Modified(MultipleChoiceTask):
         
         self.dataset = data_lst
 
+    """def load_data(self):
+        assert os.path.exists(self.DATASET_PATH)
+        data_df = pd.read_csv(self.DATASET_PATH)
+        print(data_df.shape)
+
+        data_lst = data_df.values.tolist()
+        # assert isinstance(data, list)
+        data_map = map(self.__list2dict, data_lst)
+        assert isinstance(data_map, map)
+        self.dataset = data_map
+        self.data = data_lst
+
+    def __list2dict(self, list_) -> dict:
+        assert isinstance(list_, list) and len(list_) == 4
+        query, title, cate_desc, label = list_
+
+        return MCTask_Modified.InputTemplate(query, title, cate_desc, label).entity()"""
+
     class InputTemplate:
         def __init__(self, query: str, title: str, cate_desc: str, label: str):
             self.query = query
@@ -59,17 +77,17 @@ class MCTask_Modified(MultipleChoiceTask):
 
         def entity(self) -> dict:
             return {
-                "id": None,
+                "id": "None",
                 "query": f"[Query] {self.query}\n"
                          f"[Product]\n"
                          f"Title: {self.title}\n"
                          f"Category: {self.cate_desc}\n"
                          f"[Relevance] ",
-                "gold": self.label
+                "gold": str(self.label)
             }
 
 
-# TODO: Replace `NewTask` with the name of your Task.
+# TODO: Replace `NewTask` with the name of your Task. 
 class QueryItem_Task(MCTask_Modified):
     VERSION = 0
     # TODO: Add the `DATASET_PATH` string. This will be the name of the `Task`
@@ -94,7 +112,7 @@ class QueryItem_Task(MCTask_Modified):
         # TODO: Fill in the return with `True` if the Task has test data; else `False`.
         return False
 
-    def training_docs(self):
+    def training_docs(self) -> list:
         if self.has_training_docs():
             # We cache training documents in `self._training_docs` for faster
             # few-shot processing. If the data is too large to fit in memory,
@@ -109,12 +127,9 @@ class QueryItem_Task(MCTask_Modified):
                 # self._training_docs = map(self._process_doc, self.data)
                 
                 # assert isinstance(data, list)
-                data_map = map(self._process_doc, self.dataset)
-                assert isinstance(data_map, map)
+                data_lst = list(map(self._process_doc, self.dataset))
                 
-                return data_map
-        else:
-            return None
+            return data_lst
 
     def validation_docs(self):
         if self.has_validation_docs():
@@ -136,7 +151,7 @@ class QueryItem_Task(MCTask_Modified):
             # named differently than the default `"test"`.
             return self.dataset["test"]
 
-    def _process_doc(self, doc):
+    def _process_doc(self, doc) -> dict:
         # TODO: Process (detokenize, strip, replace etc.) each individual `doc`
         # with this function. You can map this across the docs in each available
         # dataset split. See the TODOs in `train_docs`, `validation_docs`, and
@@ -146,16 +161,17 @@ class QueryItem_Task(MCTask_Modified):
         query, title, cate_desc, label = doc
 
         return MCTask_Modified.InputTemplate(query, title, cate_desc, label).entity()
+        
 
-    def doc_to_text(self, doc):
+    def doc_to_text(self, doc: list):
         # TODO: Format the query prompt portion of the document example.
-        return ""
+        return doc["query"]
 
     def doc_to_target(self, doc):
         # TODO: Fill in the `target` ("gold answer") variable.
         # The prepended `" "` is required to space out the `doc_to_text` and
         # `doc_to_target` strings.
-        target = ""
+        target = doc["gold"]
         return " " + target
 
     def construct_requests(self, doc, ctx):
