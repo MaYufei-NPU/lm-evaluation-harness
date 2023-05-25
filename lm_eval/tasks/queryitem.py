@@ -106,11 +106,11 @@ class QueryItem_Task(MCTask_Modified):
 
     def has_validation_docs(self):
         # TODO: Fill in the return with `True` if the Task has validation data; else `False`.
-        return False
+        return True
 
     def has_test_docs(self):
         # TODO: Fill in the return with `True` if the Task has test data; else `False`.
-        return False
+        return True
 
     def training_docs(self) -> list:
         if self.has_training_docs():
@@ -139,7 +139,9 @@ class QueryItem_Task(MCTask_Modified):
             # `map(self._process_doc, self.dataset["validation"])`
             # In most case you can leave this as is unless the dataset split is
             # named differently than the default `"validation"`.
-            return self.dataset["validation"]
+            data_lst = list(map(self._process_doc, self.dataset))
+
+            return data_lst
 
     def test_docs(self):
         if self.has_test_docs():
@@ -149,7 +151,9 @@ class QueryItem_Task(MCTask_Modified):
             # `map(self._process_doc, self.dataset["test"])`
             # In most case you can leave this as is unless the dataset split is
             # named differently than the default `"test"`.
-            return self.dataset["test"]
+            data_lst = list(map(self._process_doc, self.dataset))
+
+            return data_lst
 
     def _process_doc(self, doc) -> dict:
         # TODO: Process (detokenize, strip, replace etc.) each individual `doc`
