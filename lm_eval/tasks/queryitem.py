@@ -176,7 +176,7 @@ class QueryItem_Task(MCTask_Modified):
         # TODO: Fill in the `target` ("gold answer") variable.
         # The prepended `" "` is required to space out the `doc_to_text` and
         # `doc_to_target` strings.
-        target = doc["gold"]
+        target = str(doc["gold"])
         return " " + target
 
     # def construct_requests(self, doc, ctx):
