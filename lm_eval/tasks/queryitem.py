@@ -76,6 +76,7 @@ class MCTask_Modified(MultipleChoiceTask):
             self.label = label
 
         def entity(self) -> dict:
+            num_to_letter = {"1": "A", "2": "B", "3": "C", "4": "D", "5": "E"}
             return {
                 "id": "None",
                 "query": f"[Query] {self.query}\n"
@@ -83,7 +84,8 @@ class MCTask_Modified(MultipleChoiceTask):
                          f"Title: {self.title}\n"
                          f"Category: {self.cate_desc}\n"
                          f"[Relevance] ",
-                "gold": str(self.label)
+                "choices": ["A", "B", "C"],
+                "gold": self.label
             }
 
 
@@ -177,7 +179,7 @@ class QueryItem_Task(MCTask_Modified):
         target = doc["gold"]
         return " " + target
 
-    def construct_requests(self, doc, ctx):
+    # def construct_requests(self, doc, ctx):
         """Uses RequestFactory to construct Requests and returns an iterable of
         Requests which will be sent to the LM.
 
@@ -191,7 +193,7 @@ class QueryItem_Task(MCTask_Modified):
         """
         # TODO: Construct your language model requests with the request factory, `rf`,
         # and return them as an iterable.
-        return []
+        # return []
 
     # def process_results(self, doc, results):
         """Take a single document and the LM results and evaluates, returning a
