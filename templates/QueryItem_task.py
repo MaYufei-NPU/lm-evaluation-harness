@@ -28,7 +28,7 @@ class MCTask_Modified(MultipleChoiceTask):
             {"question": ..., "answer": ...} or
             {"question": ..., question, answer)
         """
-    """TODO: The 'modified' in class name indicates that the data are loaded from a local_dir."""
+    # TODO: The 'modified' in class name indicates that the data are loaded from a local_dir.
     
     # The name of the `Task` benchmark as denoted in the HuggingFace datasets Hub
     # or a path to a custom `datasets` loading script.
