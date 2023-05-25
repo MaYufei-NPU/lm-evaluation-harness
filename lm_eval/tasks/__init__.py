@@ -326,7 +326,7 @@ TASK_REGISTRY = {
     **pawsx.construct_tasks(),
     **xnli.construct_tasks(),
     **mgsm.construct_tasks(),
-    "queryitem": queryitem.QueryItem_Task()
+    "queryitem": queryitem.QueryItem_Task
 }
 
 
