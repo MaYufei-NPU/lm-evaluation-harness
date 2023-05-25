@@ -128,8 +128,8 @@ class QueryItem_Task(MCTask_Modified):
                 
                 # assert isinstance(data, list)
                 data_lst = list(map(self._process_doc, self.dataset))
-                
-            return data_lst
+
+                return data_lst
 
     def validation_docs(self):
         if self.has_validation_docs():
@@ -161,13 +161,12 @@ class QueryItem_Task(MCTask_Modified):
         query, title, cate_desc, label = doc
 
         return MCTask_Modified.InputTemplate(query, title, cate_desc, label).entity()
-        
 
-    def doc_to_text(self, doc: list):
+    def doc_to_text(self, doc: dict) -> str:
         # TODO: Format the query prompt portion of the document example.
         return doc["query"]
 
-    def doc_to_target(self, doc):
+    def doc_to_target(self, doc: dict) -> str:
         # TODO: Fill in the `target` ("gold answer") variable.
         # The prepended `" "` is required to space out the `doc_to_text` and
         # `doc_to_target` strings.

@@ -184,7 +184,7 @@ def evaluate(
     # If we ever run into issues where the eval tasks don't fit in memory and we can't afford a machine with bigger
     # memory, we can always modify this plumbing to support that, but I didn't want to include it just yet because
     # over-engineering is bad (or we could make it write the requests to disk and then read them back out again
-    #  - probably using an sqlite db because of all the moving parts we have
+    #  - probably using a sqlite db because of all the moving parts we have
 
     # TODO: we need unit tests & sanity checks or something to ensure that the return of `validation_docs` is stable
     docs = {}
