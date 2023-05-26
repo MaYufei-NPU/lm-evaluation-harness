@@ -196,7 +196,7 @@ class QueryItem_Task(MCTask_Modified):
         # return []
 
     # def process_results(self, doc, results):
-        """Take a single document and the LM results and evaluates, returning a
+    """Take a single document and the LM results and evaluates, returning a
         dict where keys are the names of submetrics and values are the values of
         the metric for that one document
 
@@ -204,18 +204,18 @@ class QueryItem_Task(MCTask_Modified):
             The document as returned from training_docs, validation_docs, or test_docs.
         :param results:
             The results of the requests created in construct_requests.
-        """
+    """
         # TODO: For each (sub)metric in the task evaluation, add a key-value pair
         # with the metric name as key and the corresponding metric result as value
         # for the current `doc`.
         # return {}
 
     # def aggregation(self):
-        """
+    """
         :returns: {str: [metric_score] -> float}
             A dictionary where keys are the names of submetrics and values are
             functions that aggregate a list of metric scores
-        """
+    """
         # TODO: For each (sub)metric in the task evaluation, add a key-value pair
         # with the metric name as key and an aggregation function as value which
         # determines how to combine results from each document in the dataset.
