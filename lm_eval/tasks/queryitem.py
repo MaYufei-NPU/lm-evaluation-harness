@@ -79,7 +79,9 @@ class MCTask_Modified(MultipleChoiceTask):
             num_to_letter = {"1": "A", "2": "B", "3": "C", "4": "D", "5": "E"}
             return {
                 "id": "None",
-                "query": f"[Query] {self.query}\n"
+                "query": f"[Instruction] On a scale from A to C (A denotes low, B denotes medium, and C denotes high), "
+                         f"grade the relevance level between the query and product and answer with A, B or C."
+                         f"[Query] {self.query}\n"
                          f"[Product]\n"
                          f"Title: {self.title}\n"
                          f"Category: {self.cate_desc}\n"
