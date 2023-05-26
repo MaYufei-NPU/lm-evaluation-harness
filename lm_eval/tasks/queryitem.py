@@ -46,7 +46,7 @@ class MCTask_Modified(MultipleChoiceTask):
         assert os.path.exists(self.DATASET_PATH)
         data_df = pd.read_csv(self.DATASET_PATH)
         print(data_df.shape)
-        data_lst = data_df.values.tolist()
+        data_lst = data_df.values.tolist()[:100]
         
         self.dataset = data_lst
 
@@ -104,11 +104,11 @@ class QueryItem_Task(MCTask_Modified):
 
     def has_training_docs(self):
         # TODO: Fill in the return with `True` if the Task has training data; else `False`.
-        return True
+        return False
 
     def has_validation_docs(self):
         # TODO: Fill in the return with `True` if the Task has validation data; else `False`.
-        return True
+        return False
 
     def has_test_docs(self):
         # TODO: Fill in the return with `True` if the Task has test data; else `False`.
@@ -210,7 +210,7 @@ class QueryItem_Task(MCTask_Modified):
         # for the current `doc`.
         # return {}
 
-    def aggregation(self):
+    # def aggregation(self):
         """
         :returns: {str: [metric_score] -> float}
             A dictionary where keys are the names of submetrics and values are
@@ -220,10 +220,10 @@ class QueryItem_Task(MCTask_Modified):
         # with the metric name as key and an aggregation function as value which
         # determines how to combine results from each document in the dataset.
         # Check `lm_eval.metrics` to find built-in aggregation functions.
-        return {}
+        # return {}
 
-    def higher_is_better(self):
+    # def higher_is_better(self):
         # TODO: For each (sub)metric in the task evaluation, add a key-value pair
         # with the metric name as key and a `bool` value determining whether or
         # not higher values of that metric are deemed better.
-        return {}
+        # return {}
