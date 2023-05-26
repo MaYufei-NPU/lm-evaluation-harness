@@ -46,7 +46,7 @@ class MCTask_Modified(MultipleChoiceTask):
         assert os.path.exists(self.DATASET_PATH)
         data_df = pd.read_csv(self.DATASET_PATH)
         print(data_df.shape)
-        data_lst = data_df.values.tolist()[:100]
+        data_lst = data_df.values.tolist()
         
         self.dataset = data_lst
 
