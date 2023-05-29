@@ -11,6 +11,7 @@ Homepage: TODO: Add the URL to the task's Homepage here.
 import os
 
 import pandas as pd
+import numpy as np
 
 from lm_eval.base import MultipleChoiceTask
 
@@ -45,8 +46,13 @@ class MCTask_Modified(MultipleChoiceTask):
     def download(self, data_dir=None, cache_dir=None, download_mode=None):
         assert os.path.exists(self.DATASET_PATH)
         data_df = pd.read_csv(self.DATASET_PATH)
+        data_array = data_df.values
         print(data_df.shape)
-        data_lst = data_df.values.tolist()
+
+        np.random.seed(42)
+        np.random.shuffle(data_array)
+        data_lst = data_array.tolist()[:5000]
+        print(len(data_lst))
         
         self.dataset = data_lst
 
