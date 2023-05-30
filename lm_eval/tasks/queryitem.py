@@ -85,7 +85,7 @@ class MCTask_Modified(MultipleChoiceTask):
 
             return {
                 "id": "None",
-                "query": f"[Instruction] On a scale from 1 to 3, grade the relevance level between the query and product and answer with a single scalar."
+                "query": f"[Instruction] On a scale from 1 to 3, grade the relevance level between the query and product and answer with a single scalar.\n"
                          f"[Query] {self.query}\n"
                          f"[Product]\n"
                          f"Title: {self.title}\n"
