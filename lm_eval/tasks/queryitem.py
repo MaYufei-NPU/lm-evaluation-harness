@@ -85,7 +85,10 @@ class MCTask_Modified(MultipleChoiceTask):
 
             return {
                 "id": "None",
-                "query": f"[Instruction] On a scale from 1 to 3, grade the relevance level between the query and product and answer with a single scalar.\n"
+                "query": f"[Instruction] Your task is to predict relevance level from 1 to 3 based on the query and the product title and product category:\n"
+                         f"1. totally irrevelant product.\n"
+                         f"2. the product only partial matches the query.\n"
+                         f"3. the product exactly matches query  or contains query consecutively.\n"
                          f"[Query] {self.query}\n"
                          f"[Product]\n"
                          f"Title: {self.title}\n"
