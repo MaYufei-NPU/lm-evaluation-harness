@@ -1,18 +1,160 @@
 !!@@##@@!! -- Example 0
-[Query] portable air purifier
+[Instruction] Your task is to predict relevance level from 1 to 3 based on the query and the product title and product category:
+1. totally irrevelant product.
+2. the product only partial matches the query.
+3. the product exactly matches query  or contains query consecutively.
+[Query] new barcode for gold shop
 [Product]
-Title: 3-YEAR Warranty Purifier Living Air Classic Hepa Filter Air purifier
-Category: Home Appliances, Air Purifier
+Title: High Resolution Megapixel Sensor Barcode Scanner
+Category: Consumer Electronics, Computer Hardware & Software, Scanners
+[Relevance]  2
+
+[Instruction] Your task is to predict relevance level from 1 to 3 based on the query and the product title and product category:
+1. totally irrevelant product.
+2. the product only partial matches the query.
+3. the product exactly matches query  or contains query consecutively.
+[Query] fotbal trophy
+[Product]
+Title: High on Demand Metal Singing Bowl Yoga Meditation Use Tibetan Singing Bowl from Indian Exporter
+Category: Gifts & Crafts, Metal Crafts
+[Relevance]  1
+
+[Instruction] Your task is to predict relevance level from 1 to 3 based on the query and the product title and product category:
+1. totally irrevelant product.
+2. the product only partial matches the query.
+3. the product exactly matches query  or contains query consecutively.
+[Query] teak
+[Product]
+Title: Cheap and luxury Style Solid Wood Teak Square Single Extend Table 2 Outdoor Garden Table Furniture
+Category: Furniture, Outdoor Furniture, Garden Sets
 [Relevance]  3
 
-[Query] gaming cabinet
+[Instruction] Your task is to predict relevance level from 1 to 3 based on the query and the product title and product category:
+1. totally irrevelant product.
+2. the product only partial matches the query.
+3. the product exactly matches query  or contains query consecutively.
+[Query] soft play equipment
 [Product]
-Title: Popular desktop pc computer case support atx matx motherboard cpu rgb fan computer gaming computer cases
-Category: Consumer Electronics, Computer Hardware & Software, Gaming Computer Hardware & Software, Gaming Computer Cases & Towers
+Title: outdoor slide playgrounds accessories aluminium playground pipe connecting parts clamps fasteners for wholesale
+Category: Sports & Entertainment, Amusement Park Products, Playground, Slides
+[Relevance] 
+!!@@##@@!! -- Example 1
+[Instruction] Your task is to predict relevance level from 1 to 3 based on the query and the product title and product category:
+1. totally irrevelant product.
+2. the product only partial matches the query.
+3. the product exactly matches query  or contains query consecutively.
+[Query] oral injection for whitening the skin
+[Product]
+Title: OEM Collagen Peptides with Hyaluronic Acid and Vitamin C Hydrolyzed Collagen Protein Powder Drink
+Category: Health & Medical, Health Food
+[Relevance]  2
+
+[Instruction] Your task is to predict relevance level from 1 to 3 based on the query and the product title and product category:
+1. totally irrevelant product.
+2. the product only partial matches the query.
+3. the product exactly matches query  or contains query consecutively.
+[Query] Hoagland Modified Basal Salt Mixture
+[Product]
+Title: Himalayan Edible Black Salt Products With Crystal Salt Available In Reasonable Market Price Himalayan Fine Salt
+Category: Food & Beverage, Seasonings & Condiments, Salt
+[Relevance]  2
+
+[Instruction] Your task is to predict relevance level from 1 to 3 based on the query and the product title and product category:
+1. totally irrevelant product.
+2. the product only partial matches the query.
+3. the product exactly matches query  or contains query consecutively.
+[Query] byd car accessories
+[Product]
+Title: Free Sample Black TPU Car Key Case For Toyota Camry CHR Prius Corolla RAV4 Prado 2017 2018 Remote keyless Cover Keychain
+Category: Vehicle Parts & Accessories, Automotive Parts & Accessories, Interior Accessories, Car Key Accessories
+[Relevance]  2
+
+[Instruction] Your task is to predict relevance level from 1 to 3 based on the query and the product title and product category:
+1. totally irrevelant product.
+2. the product only partial matches the query.
+3. the product exactly matches query  or contains query consecutively.
+[Query] hot wheels
+[Product]
+Title: Wholesale 1: 64 Metal Car Model Toy Vehicles 1:64 Super Plastci Kits Metal Die Cast Small Diecast Cars
+Category: Mother, Kids & Toys, Toy Vehicle, Diecast Toys
+[Relevance] 
+!!@@##@@!! -- Example 2
+[Instruction] Your task is to predict relevance level from 1 to 3 based on the query and the product title and product category:
+1. totally irrevelant product.
+2. the product only partial matches the query.
+3. the product exactly matches query  or contains query consecutively.
+[Query] icore9
+[Product]
+Title: High Quality LM3S9D96IQC80A2SD IC MCU 32BIT 512KB FLASH 100LQFP LM3S9D96-IQC80-A2
+Category: Electronic Components, Accessories & Telecommunications, Integrated Circuits
+[Relevance]  2
+
+[Instruction] Your task is to predict relevance level from 1 to 3 based on the query and the product title and product category:
+1. totally irrevelant product.
+2. the product only partial matches the query.
+3. the product exactly matches query  or contains query consecutively.
+[Query] tires 195 80 r15
+[Product]
+Title: Wholesale Factory Industrial Tyres 26*7.5-12 Gardening Tractor Turf Tires
+Category: Vehicle Parts & Accessories, Wheels, Tires & Accessories, Other Wheels, Tires & Accessories
 [Relevance]  3
 
-[Query] basketball jersey
+[Instruction] Your task is to predict relevance level from 1 to 3 based on the query and the product title and product category:
+1. totally irrevelant product.
+2. the product only partial matches the query.
+3. the product exactly matches query  or contains query consecutively.
+[Query] jewelry packaging set
 [Product]
-Title: Customized Latest Design Youth Basketball Jersey And Shorts Cheap Basketball Jersey Uniform Design Color Red Basketball Uniforms
-Category: Sports & Entertainment, Sports Gloves, Other Sports Gloves
+Title: MOQ 100 PCS Luxury Custom Printed Logo Black Color Sliding Jewelry Bracelet Pillow Box
+Category: Timepieces, Jewelry, Eyewear, Jewelry, Jewellery Cases, Boxes
+[Relevance]  3
+
+[Instruction] Your task is to predict relevance level from 1 to 3 based on the query and the product title and product category:
+1. totally irrevelant product.
+2. the product only partial matches the query.
+3. the product exactly matches query  or contains query consecutively.
+[Query] kd99 smartwatch ultra
+[Product]
+Title: Smart watches new arrays 2023 p36 200mAh Smart Step Calories Square Screen Digital Watch pk x8 ultra
+Category: Consumer Electronics, Smart Electronics, Wearable Devices, Smart Watches
+[Relevance] 
+!!@@##@@!! -- Example 3
+[Instruction] Your task is to predict relevance level from 1 to 3 based on the query and the product title and product category:
+1. totally irrevelant product.
+2. the product only partial matches the query.
+3. the product exactly matches query  or contains query consecutively.
+[Query] drinking glass
+[Product]
+Title: Custom Logo Printed Water Drinking Glass Cups Wholesale 16oz Pint Glass Tumbler For Beer Coffee Milk
+Category: Home & Garden, Kitchen & Tabletop, Bar & Wine, Beer Glasses
+[Relevance]  3
+
+[Instruction] Your task is to predict relevance level from 1 to 3 based on the query and the product title and product category:
+1. totally irrevelant product.
+2. the product only partial matches the query.
+3. the product exactly matches query  or contains query consecutively.
+[Query] champagne and wine glasses.
+[Product]
+Title: 6oz Clear Champagne Glasses Flute Lightweight Cylinder Champagne Glasses For Wedding White Wine Glasses For Vodka
+Category: Home & Garden, Kitchen & Tabletop, Bar & Wine, Goblets
+[Relevance]  3
+
+[Instruction] Your task is to predict relevance level from 1 to 3 based on the query and the product title and product category:
+1. totally irrevelant product.
+2. the product only partial matches the query.
+3. the product exactly matches query  or contains query consecutively.
+[Query] irregular Pearl heart
+[Product]
+Title: New Fashion Korean Oversized White Pearl Drop Earrings for Women Bohemian Golden Round Zircon Wedding Earrings Jewelry Gift
+Category: Timepieces, Jewelry & Eyewear, Jewelry, Fashion Jewelry, Fashion Jewelry Earrings
+[Relevance]  2
+
+[Instruction] Your task is to predict relevance level from 1 to 3 based on the query and the product title and product category:
+1. totally irrevelant product.
+2. the product only partial matches the query.
+3. the product exactly matches query  or contains query consecutively.
+[Query] used shima seiki knitting machine
+[Product]
+Title: knitting machine needles COMPOUND NEEDLE 50.75G12 50.75G13 50.75G16 KNITTING NEEDLES OF WARP KNITTING MACHINE RASCHEL MACHINE
+Category: Manufacturing & Processing Machinery, Textile Machinery Parts
 [Relevance] 

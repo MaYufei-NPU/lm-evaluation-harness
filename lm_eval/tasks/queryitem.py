@@ -95,7 +95,7 @@ class MCTask_Modified(MultipleChoiceTask):
                          f"Category: {self.cate_desc}\n"
                          f"[Relevance] ",
                 "choices": ["1", "2", "3"],
-                "gold": self.label
+                "gold": self.label - 1
             }
 
 
@@ -182,11 +182,11 @@ class QueryItem_Task(MCTask_Modified):
         # TODO: Format the query prompt portion of the document example.
         return doc["query"]
 
-    def doc_to_target(self, doc: dict) -> str:
+    """def doc_to_target(self, doc: dict) -> str:
         # TODO: Fill in the `target` ("gold answer") variable.
         # The prepended `" "` is required to space out the `doc_to_text` and
         # `doc_to_target` strings.
-        return " " + doc["choices"][doc["gold"] - 1]
+        return " " + doc["choices"][doc["gold"]]"""
 
     # def construct_requests(self, doc, ctx):
     """Uses RequestFactory to construct Requests and returns an iterable of
