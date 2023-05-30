@@ -70,7 +70,7 @@ class HuggingFaceAutoLM(BaseLM):
     def __init__(
         self,
         pretrained: str,
-        quantized: Optional[Union[True, str]] = None,
+        # quantized: Optional[Union[True, str]] = None,
         tokenizer: Optional[str] = None,
         subfolder: Optional[str] = None,
         revision: Optional[str] = "main",
@@ -88,7 +88,7 @@ class HuggingFaceAutoLM(BaseLM):
         peft: str = None,
         load_in_8bit: Optional[bool] = False,
         trust_remote_code: Optional[bool] = False,
-        gptq_use_triton: Optional[bool] = False,
+        # gptq_use_triton: Optional[bool] = False,
     ):
         """Initializes a HuggingFace `AutoModel` and `AutoTokenizer` for evaluation.
         Args:
@@ -200,12 +200,12 @@ class HuggingFaceAutoLM(BaseLM):
         model_kwargs["load_in_8bit"] = load_in_8bit
         self.model = self._create_auto_model(
             pretrained=pretrained,
-            quantized=quantized,
+            # quantized=quantized,
             trust_remote_code=trust_remote_code,
             revision=revision,
             subfolder=subfolder,
             torch_dtype=_get_dtype(dtype, self._config),
-            gptq_use_triton=gptq_use_triton,
+            # gptq_use_triton=gptq_use_triton,
             **model_kwargs,
         )
         # note: peft_path can be different than pretrained model path
@@ -234,7 +234,7 @@ class HuggingFaceAutoLM(BaseLM):
         self,
         *,
         pretrained: str,
-        quantized: Optional[Union[True, str]] = None,
+        #quantized: Optional[Union[True, str]] = None,
         revision: str,
         subfolder: str,
         device_map: Optional[Union[str, _DeviceMapping]] = None,
@@ -243,10 +243,20 @@ class HuggingFaceAutoLM(BaseLM):
         load_in_8bit: Optional[bool] = False,
         trust_remote_code: Optional[bool] = False,
         torch_dtype: Optional[Union[str, torch.dtype]] = None,
-        gptq_use_triton: Optional[bool] = False,
+        #gptq_use_triton: Optional[bool] = False,
     ) -> transformers.AutoModel:
         """Returns a pre-trained pytorch model from a pre-trained model configuration."""
-        if quantized is None:
+        model = self.AUTO_MODEL_CLASS.from_pretrained(
+            pretrained,
+            revision=revision + ("/" + subfolder if subfolder is not None else ""),
+            device_map=device_map,
+            max_memory=max_memory,
+            offload_folder=offload_folder,
+            load_in_8bit=load_in_8bit,
+            trust_remote_code=trust_remote_code,
+            torch_dtype=torch_dtype,
+        )
+        """if quantized is None:
             model = self.AUTO_MODEL_CLASS.from_pretrained(
                 pretrained,
                 revision=revision + ("/" + subfolder if subfolder is not None else ""),
@@ -268,7 +278,7 @@ class HuggingFaceAutoLM(BaseLM):
                 use_safetensors=True if quantized == True else quantized.endswith('.safetensors'),
                 use_triton=gptq_use_triton,
                 warmup_triton=gptq_use_triton,
-            )
+            )"""
         return model
 
     def _create_auto_model_peft(
