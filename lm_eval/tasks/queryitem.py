@@ -75,7 +75,7 @@ class MCTask_Modified(MultipleChoiceTask):
         return MCTask_Modified.InputTemplate(query, title, cate_desc, label).entity()"""
 
     class InputTemplate:
-        def __init__(self, query: str, title: str, cate_desc: str, label: str):
+        def __init__(self, query: str, title: str, cate_desc: str, label: int):
             self.query = query
             self.title = title
             self.cate_desc = cate_desc
