@@ -257,3 +257,7 @@ def yesno(x):
         return "yes"
     else:
         return "no"
+
+def queryitem_f1(arr):
+
+    pass

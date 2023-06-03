@@ -200,25 +200,30 @@ class QueryItem_Task(MCTask_Modified):
         # TODO: For each (sub)metric in the task evaluation, add a key-value pair
         # with the metric name as key and the corresponding metric result as value
         # for the current `doc`.
-        print(f"results.__class__ == {type(results)}")
+        """print(f"results.__class__ == {type(results)}")
         print(results)
-        assert False
-        return {}
+        assert False"""
+        gold = doc["gold"]
+        assert isinstance(gold, int)
+        # pick up those correct and relevance of which is 3
+        acc = 1.0 if (np.argmax(results) == gold and gold == 2) else 0.0
 
-    # def aggregation(self):
-    """
+        return {"qr_f1": acc}
+
+    def aggregation(self):
+        """
         :returns: {str: [metric_score] -> float}
             A dictionary where keys are the names of submetrics and values are
             functions that aggregate a list of metric scores
-    """
+        """
         # TODO: For each (sub)metric in the task evaluation, add a key-value pair
         # with the metric name as key and an aggregation function as value which
         # determines how to combine results from each document in the dataset.
         # Check `lm_eval.metrics` to find built-in aggregation functions.
         # return {}
 
-    # def higher_is_better(self):
+    def higher_is_better(self):
         # TODO: For each (sub)metric in the task evaluation, add a key-value pair
         # with the metric name as key and a `bool` value determining whether or
         # not higher values of that metric are deemed better.
-        # return {}
+        return {"qr_f1": True}
