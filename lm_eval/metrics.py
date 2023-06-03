@@ -220,11 +220,11 @@ def bootstrap_stderr(f, xs, iters):
 
     print("bootstrapping for stddev:", f.__name__)
     for bootstrap in tqdm(
-        pool.imap(
-            _bootstrap_internal(f, chunk_size),
-            [(i, xs) for i in range(iters // chunk_size)],
-        ),
-        total=iters // chunk_size,
+            pool.imap(
+                _bootstrap_internal(f, chunk_size),
+                [(i, xs) for i in range(iters // chunk_size)],
+            ),
+            total=iters // chunk_size,
     ):
         # sample w replacement
         res.extend(bootstrap)
@@ -258,6 +258,8 @@ def yesno(x):
     else:
         return "no"
 
-def queryitem_f1(arr):
 
-    pass
+def queryitem_f1(arr):
+    print(arr)
+    print(arr.__class__)
+    exit()

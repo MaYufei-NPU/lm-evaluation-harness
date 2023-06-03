@@ -14,6 +14,7 @@ import pandas as pd
 import numpy as np
 
 from lm_eval.base import MultipleChoiceTask
+from lm_eval.metrics import queryitem_f1
 
 # TODO: Add the BibTeX citation for the task.
 _CITATION = """
@@ -30,10 +31,10 @@ class MCTask_Modified(MultipleChoiceTask):
             {"question": ..., question, answer)
         """
     # TODO: The 'modified' in class name indicates that the data are loaded from a local_dir.
-    
+
     # The name of the `Task` benchmark as denoted in the HuggingFace datasets Hub
     # or a path to a custom `datasets` loading script.
-    
+
     # DATASET_PATH: str = r"/root/autodl-tmp/projects/llm_relevence_evaluation_data_0523.csv"
 
     # The name of a subset within `DATASET_PATH`.
@@ -53,9 +54,8 @@ class MCTask_Modified(MultipleChoiceTask):
         np.random.shuffle(data_array)
         data_lst = data_array.tolist()[:5000]
         print(len(data_lst))
-        
-        self.dataset = data_lst
 
+        self.dataset = data_lst
 
     class InputTemplate:
         def __init__(self, query: str, title: str, cate_desc: str, label: int):
@@ -65,7 +65,6 @@ class MCTask_Modified(MultipleChoiceTask):
             self.label = label
 
         def entity(self) -> dict:
-
             return {
                 "id": "None",
                 "query": f"[Instruction] Your task is to predict relevance level from 1 to 3 based on the query and the product title and product category:\n"
@@ -120,7 +119,7 @@ class QueryItem_Task(MCTask_Modified):
                 # In most case you can leave this as is unless the dataset split is
                 # named differently than the default `"train"`.
                 # self._training_docs = map(self._process_doc, self.data)
-                
+
                 # assert isinstance(data, list)
                 data_lst = list(map(self._process_doc, self.dataset))
 
@@ -183,11 +182,12 @@ class QueryItem_Task(MCTask_Modified):
             language description, as well as the few shot examples, and the question
             part of the document for `doc`.
     """
-        # TODO: Construct your language model requests with the request factory, `rf`,
-        # and return them as an iterable.
-        # return []
 
-    def process_results(self, doc, results):
+    # TODO: Construct your language model requests with the request factory, `rf`,
+    # and return them as an iterable.
+    # return []
+
+    def process_results(self, doc, results) -> dict:
         """Take a single document and the LM results and evaluates, returning a
         dict where keys are the names of submetrics and values are the values of
         the metric for that one document
@@ -208,7 +208,9 @@ class QueryItem_Task(MCTask_Modified):
         # pick up those correct and relevance of which is 3
         acc = 1.0 if (np.argmax(results) == gold and gold == 2) else 0.0
 
-        return {"qr_f1": acc}
+        return {
+            "qr_f1": acc
+        }
 
     def aggregation(self):
         """
@@ -220,7 +222,7 @@ class QueryItem_Task(MCTask_Modified):
         # with the metric name as key and an aggregation function as value which
         # determines how to combine results from each document in the dataset.
         # Check `lm_eval.metrics` to find built-in aggregation functions.
-        # return {}
+        return {"qr_f1": queryitem_f1}
 
     def higher_is_better(self):
         # TODO: For each (sub)metric in the task evaluation, add a key-value pair
