@@ -41,9 +41,8 @@ class MCTask_Modified(MultipleChoiceTask):
     DATASET_NAME: str = None
 
     def __init__(self):
-        self.dataset = None
-        self.DATASET_PATH = r"/root/autodl-tmp/projects/llm_relevence_evaluation_data_0523.csv"
         super().__init__()
+        self.DATASET_PATH = r"/root/autodl-tmp/projects/llm_relevence_evaluation_data_0523.csv"
 
     def download(self, data_dir=None, cache_dir=None, download_mode=None):
         assert os.path.exists(self.DATASET_PATH)
