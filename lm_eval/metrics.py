@@ -260,6 +260,15 @@ def yesno(x):
 
 
 def queryitem_f1(arr):
-    print(arr)
+    print(len(arr))
     print(arr.__class__)
-    exit()
+
+    numerator = sum(i for i in arr[0])
+    precision_denominator = sum(p for p in arr[1])
+    recall_denominator = sum(r for r in arr[2])
+
+    p = numerator / precision_denominator
+    r = numerator / recall_denominator
+    f1 = 2 * p * r / (p + r)
+
+    return f1
