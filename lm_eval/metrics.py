@@ -261,5 +261,6 @@ def yesno(x):
 
 def queryitem_f1(arr):
     print(arr)
+    print(len(arr))
     print(arr.__class__)
     exit()
