@@ -207,9 +207,11 @@ class QueryItem_Task(MCTask_Modified):
         assert isinstance(gold, int)
         # pick up those correct and relevance of which is 3
         acc = 1.0 if (np.argmax(results) == gold and gold == 2) else 0.0
+        precision_denominator = 1 if np.argmax(results) == gold else 0
+        recall_denominator = 1 if gold == 2 else 0
 
         return {
-            "qr_f1": acc
+            "qr_f1": (acc, precision_denominator, recall_denominator)
         }
 
     def aggregation(self):
