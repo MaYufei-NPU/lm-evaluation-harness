@@ -211,7 +211,7 @@ class QueryItem_Task(MCTask_Modified):
         recall_denominator = 1 if gold == 2 else 0
 
         return {
-            "qr_f1": (acc, precision_denominator, recall_denominator)
+            "qi_f1": (acc, precision_denominator, recall_denominator)
         }
 
     def aggregation(self):
@@ -224,10 +224,10 @@ class QueryItem_Task(MCTask_Modified):
         # with the metric name as key and an aggregation function as value which
         # determines how to combine results from each document in the dataset.
         # Check `lm_eval.metrics` to find built-in aggregation functions.
-        return {"qr_f1": queryitem_f1}
+        return {"qi_f1": queryitem_f1}
 
     def higher_is_better(self):
         # TODO: For each (sub)metric in the task evaluation, add a key-value pair
         # with the metric name as key and a `bool` value determining whether or
         # not higher values of that metric are deemed better.
-        return {"qr_f1": True}
+        return {"qi_f1": True}
